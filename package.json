@@ -1,0 +1,22 @@
+{
+  "name": "react-native-showcase",
+  "version": "1.0.0",
+  "description": "react native show case project",
+  "author": "rakirox",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "concurrently npm:init:*",
+    "init:server": "yarn workspace vendureShop dev",
+    "init:app": "yarn workspace app ios"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "9.1.2"
+  },
+  "packageManager": "yarn@4.6.0"
+}
