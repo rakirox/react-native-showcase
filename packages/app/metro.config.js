@@ -1,5 +1,7 @@
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
-
+const {
+  wrapWithReanimatedMetroConfig,
+} = require('react-native-reanimated/metro-config');
 const path = require('path');
 
 const projectRoot = __dirname;
@@ -26,4 +28,6 @@ const config = {
 // Watch the local app folder, and the shared packages (uncomment if you have shared packages
 // that are being used between the mono repo's apps)
 
-module.exports = mergeConfig(getDefaultConfig(projectRoot), config);
+module.exports = wrapWithReanimatedMetroConfig(
+  mergeConfig(getDefaultConfig(projectRoot), config),
+);

@@ -1,0 +1,47 @@
+# React Native Showcase
+## Que es esto?
+Esto es un proyecto abierto de un front shop hecho con React Native usando la tecnologia de Vendure
+
+## Quien soy?
+Soy Carlos Palmero <Rakirox> desarollador mobile.
+
+[LinkedIn](https://www.linkedin.com/in/carlos-palmero-hinojosa-1a3bba46/)
+## Porque hago esto?
+
+A lo largo que uno se encuentra dentro de la industria como desarrollador movil cada vez me encuentro mas con la necesidad de tener un portafolio para una rapida comunicacion y transmision de conocimiento con compañeros, reclutadores o simplemente bajar y probar conceptos o ideas que he pensado y quiero bajar.
+
+Me encuentro realizando este esfuerzo para edificar ideas de estructura de proyectos arquitectados de forma distribuida para el re uso de valor a lo largo de una ideologia de hacer soluciones reusables para diversos casos de negocio.
+
+Demostrar la experiencia que puedo tener al respecto.
+## Work log
+### 2 day:
+He tenido la idea en mente por semanas.
+
+#### Monorepo 
+Para agilizar el desarrollo y la integracion de diversos proyectos. (rapido para solo developers)
+
+Proyectos: 
+#### Backend: Vendure Server.
+Permitetener una implementacion con graphql y rapida para evitar tiempo en apis. sin mencionar lo robusto de la solucion de Vendure.
+
+##### FrontShop: React Native App. 
+Manejado como App "contenedora" de multiples desarrollos o microfront ends.
+Diseño, hoy en dia se pueden encontrar recursos excelentes para usar de base, en lo particular no soy un diseñador, pero considero que puedo entregar pixel perfect.
+
+Despues de una busqueda: [E-Commerce App Design - Figma File](https://www.figma.com/community/file/1131440097475381135/e-commerce-app-design) By [Benzatine Infotech](https://www.figma.com/@benzatineinfo) *_Gracias! u rock._*
+
+##### Theme Library
+Todos los componentes basados en figma, listos para ser usado por cualquier otro proyecto
+
+##### Checkout Module
+Todo lo relacionado al modulo de pago de la aplicacion
+
+##### Product Display Module
+Todo lo relacionado con el mostreo de productos
+
+##### User Account Module
+Todo lo relacionado con la administracion del usuario
+
+(TBD)
+
+
