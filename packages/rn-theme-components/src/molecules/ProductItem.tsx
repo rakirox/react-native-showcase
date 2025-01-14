@@ -4,9 +4,12 @@ import ProductListItem from './ProductListItem';
 import ProductGridItem from './ProductGridItem';
 
 export type ProductItemProps = {
-  productImage?: ImageSourcePropType;
+  productImage?: string;
   delayedTime?: number;
   onProductPress?: () => void;
+  name?: string;
+  description?: string;
+  price?: string;
 };
 
 export interface ProductItemTypeProps extends ProductItemProps {

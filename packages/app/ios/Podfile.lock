@@ -1577,6 +1577,27 @@ PODS:
     - React-logger (= 0.76.5)
     - React-perflogger (= 0.76.5)
     - React-utils (= 0.76.5)
+  - RNCAsyncStorage (2.1.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNGestureHandler (2.21.2):
     - DoubleConversion
     - glog
@@ -1800,8 +1821,9 @@ DEPENDENCIES:
   - React-utils (from `../../../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../../../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../../../node_modules/react-native-gesture-handler`)
-  - RNReanimated (from `../../../node_modules/react-native-reanimated`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../../../node_modules/react-native-screens`)
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
@@ -1939,10 +1961,12 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../../../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../../../node_modules/@react-native-async-storage/async-storage"
   RNGestureHandler:
     :path: "../../../node_modules/react-native-gesture-handler"
   RNReanimated:
-    :path: "../../../node_modules/react-native-reanimated"
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../../../node_modules/react-native-screens"
   Yoga:
@@ -2013,8 +2037,9 @@ SPEC CHECKSUMS:
   React-utils: 541c6cca08f32597d4183f00e83eef2ed20d4c54
   ReactCodegen: fca7518fb8bac9ce8573b698a13d9647dbbb78ea
   ReactCommon: a6b87a7591591f7a52d9c0fec3aa05e0620d5dd3
+  RNCAsyncStorage: fe98f1b459a87b80f12207da80c50b3a3abb6081
   RNGestureHandler: 0e5ae8d72ef4afb855e98dcdbe60f27d938abe13
-  RNReanimated: d8cbc50bd784d4055e6ff913564ea95df4ecdd03
+  RNReanimated: c0a3822fec2a4886cb4bef8d915a97f9fc32459f
   RNScreens: d022507f2b6d76c73335e9e35aedcf7bb2f791b0
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: c7ea4c36c1d78ebbf45529b6e78283e4e0fe4956

@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeProducts from '../templates/HomeProducts';
+import Home from '../pages/Home';
 import Collection from '../pages/Collection';
 import Product from '../pages/Product';
 
@@ -9,7 +9,7 @@ export default function ProductStack() {
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
-        component={HomeProducts}
+        component={Home}
         options={{
           header: () => undefined,
         }}

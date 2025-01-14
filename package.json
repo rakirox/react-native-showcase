@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "concurrently npm:init:dev:*",
+    "start": "concurrently 'npm:init:dev:*'",
     "init:dev:server": "yarn workspace vendureShop dev",
     "init:dev:app": "yarn workspace app ios"
   },

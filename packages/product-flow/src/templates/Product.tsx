@@ -1,7 +1,6 @@
 import React from 'react';
-import {FlatList, Image, SafeAreaView, ScrollView, View} from 'react-native';
+import {FlatList, Image, ScrollView, View} from 'react-native';
 import {
-  Navbar,
   SmText,
   Stars,
   H4,
@@ -10,36 +9,95 @@ import {
   PsmText,
   Button,
   SectionDetail,
+  Text,
+  Icon,
+  Favorite,
 } from 'rn-theme-components';
 
-export type ProductProps = {};
+export type ProductProps = {
+  assets: string[];
+  title?: string;
+  price?: string;
+  name?: string;
+  description?: string;
+};
 
-export default function Product({}: ProductProps) {
+export default function Product({
+  assets,
+  title,
+  price,
+  name,
+  description,
+}: ProductProps) {
   const {sizes} = useTheme();
   return (
     <>
       <ScrollView contentContainerStyle={{paddingBottom: 100}}>
         <FlatList
-          data={[
-            require('../assets/products/detail/1.png'),
-            require('../assets/products/detail/2.png'),
-          ]}
+          data={assets}
           renderItem={({item}) => {
-            return <Image source={item} />;
+            return (
+              <Image source={{uri: item}} style={{width: 275, height: 413}} />
+            );
           }}
           horizontal
         />
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+          <View
+            style={{
+              flex: 2,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View
+              style={{
+                borderWidth: 1,
+                borderRadius: 8,
+                borderColor: '#9B9B9B',
+                padding: 10,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                minWidth: 130,
+              }}>
+              <Text>Size</Text>
+              <Icon type="dropdown" />
+            </View>
+          </View>
+          <View
+            style={{
+              flex: 2,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View
+              style={{
+                borderWidth: 1,
+                borderRadius: 8,
+                borderColor: '#9B9B9B',
+                padding: 10,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                minWidth: 130,
+              }}>
+              <Text>Size</Text>
+              <Icon type="dropdown" />
+            </View>
+          </View>
+          <View
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Favorite />
+          </View>
+        </View>
+
         <View style={{padding: sizes.global.padding}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <H4>H&M</H4>
-            <H4>$19.99</H4>
+            <H4>{title}</H4>
+            <H4>{price}</H4>
           </View>
-          <SmText>Short black dress</SmText>
+          <SmText>{name}</SmText>
           <Stars style={{paddingVertical: sizes.s}} />
-          <PsmText>
-            Short dress in soft cotton jersey with decorative buttons down the
-            front and a wide, frill-trimmed
-          </PsmText>
+          <PsmText>{description}</PsmText>
         </View>
         <View style={{padding: sizes.global.padding}}>
           <Button
@@ -54,11 +112,6 @@ export default function Product({}: ProductProps) {
               style={{width: '100%', height: 0.4, backgroundColor: '#9B9B9B'}}
             />
           )}
-          // ListFooterComponent={() => (
-          //   <View
-          //     style={{width: '100%', height: 0.4, backgroundColor: '#9B9B9B'}}
-          //   />
-          // )}
           ListHeaderComponent={() => (
             <View
               style={{width: '100%', height: 0.4, backgroundColor: '#9B9B9B'}}

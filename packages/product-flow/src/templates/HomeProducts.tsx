@@ -1,47 +1,74 @@
 import React from 'react';
-import {SafeAreaView, ScrollView} from 'react-native';
+import {FlatList, SafeAreaView, ScrollView} from 'react-native';
 import {
   CollectionHorizontalPreview,
   FeaturedCollection,
+  ProductType,
 } from 'rn-theme-components';
-import {useNavigation} from '@react-navigation/native';
+import {Collection, ProductVariant} from '../gql/graphql';
 
-export default function HomeProducts() {
-  const {navigate} = useNavigation();
+export type HomeProductTypes = {
+  onFeaturedPress: () => void;
+  onViewCollectionPress: (collectionId: string) => void;
+  onProductPress: (productId: string) => void;
+  collections: Collection[];
+};
+
+export default function HomeProducts({
+  collections,
+  onFeaturedPress,
+  onViewCollectionPress,
+  onProductPress,
+}: HomeProductTypes) {
+  // TODO: refacvtor, templates must not depend on any navigation managment, should be managed by prop-cb events
+
   return (
     <>
       <ScrollView>
         <FeaturedCollection
-          onPress={() => navigate('Collection')}
+          onPress={onFeaturedPress}
           buttonText="Check"
           image={require('../assets/feature.jpg')}
           firstLine="Fashion"
           secondLine="sale"
         />
         <SafeAreaView>
-          <CollectionHorizontalPreview
-            productImage={require('../assets/product.png')}
-            title="Sale"
-            subtitle="Super summer sale!"
-            actionButtonLabel="View all"
-            onuButtonPress={() => navigate('Collection')}
-            onProductPress={() => navigate('Product')}
-          />
-          <CollectionHorizontalPreview
-            productImage={require('../assets/product.png')}
-            title="New"
-            subtitle="You've never seen it before!"
-            actionButtonLabel="View all"
-            onuButtonPress={() => navigate('Collection')}
-            onProductPress={() => navigate('Product')}
-          />
-          <CollectionHorizontalPreview
-            productImage={require('../assets/product.png')}
-            title="New"
-            subtitle="You've never seen it before!"
-            actionButtonLabel="View all"
-            onuButtonPress={() => navigate('Collection')}
-            onProductPress={() => navigate('Product')}
+          <FlatList
+            data={collections}
+            keyExtractor={({id}) => id}
+            renderItem={({item}) => {
+              return (
+                <CollectionHorizontalPreview
+                  productImage={require('../assets/product.png')}
+                  title={item.name}
+                  products={item.productVariants.items.map(
+                    (pVariant: ProductVariant) => {
+                      const assets = [];
+                      assets.push(
+                        ...pVariant.assets,
+                        ...pVariant.product.assets,
+                      );
+                      return {
+                        id: pVariant.productId,
+                        title: pVariant.name,
+                        description: pVariant.product.description,
+                        price: pVariant.price,
+                        productImage: assets[0]?.source,
+                      } as ProductType;
+                    },
+                  )}
+                  subtitle={item.description}
+                  actionButtonLabel="View all"
+                  onuButtonPress={() => {
+                    onViewCollectionPress(item.id);
+                  }}
+                  onProductPress={productId => {
+                    // console.log({})
+                    onProductPress(productId);
+                  }}
+                />
+              );
+            }}
           />
         </SafeAreaView>
       </ScrollView>

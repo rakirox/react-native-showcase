@@ -4,26 +4,26 @@ import {useTheme} from '../hooks/theme';
 import CollectionPreviewHeader, {
   CollectionPreviewHeaderProps,
 } from './CollectionPreviewHeader';
-import ProductPreview from './ProductPreview';
+import ProductPreview, {ProductType} from './ProductPreview';
 
 export interface CollectionHorizontalPreviewProps
   extends CollectionPreviewHeaderProps {
   productImage: ImageSourcePropType; // image of product exmample (thumnail)
-  products?: number[];
-  onProductPress?: () => void;
+  products?: ProductType[];
+  onProductPress?: (productId: string) => void;
 }
 
 export default function CollectionHorizontalPreview({
   productImage,
-  products = [1, 2, 3, 4, 5, 6, 7, 8],
+  products = [],
   onProductPress,
   ...props
 }: CollectionHorizontalPreviewProps) {
-  const {colors, sizes} = useTheme();
+  const {sizes} = useTheme();
   return (
     <View>
       <CollectionPreviewHeader {...props} />
-      <FlatList
+      <FlatList<ProductType>
         data={products}
         horizontal
         contentContainerStyle={{
@@ -31,8 +31,10 @@ export default function CollectionHorizontalPreview({
         }}
         renderItem={({item}) => (
           <ProductPreview
-            productImage={productImage}
-            onProductPress={onProductPress}
+            product={item}
+            onProductPress={() => {
+              onProductPress?.(item.id);
+            }}
           />
         )}
       />

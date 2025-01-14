@@ -13,12 +13,20 @@ import {
   useTheme,
   ProductItem,
 } from 'rn-theme-components';
+import {
+  Collection as CollectionType,
+  Product,
+  ProductVariant,
+} from '../gql/graphql';
 
 export type CollectionProps = {
   onFilterPress?: () => void;
   onSortPress?: () => void;
   onLayoutPress?: () => void;
-  onProductPress?: () => void;
+  onProductPress?: (productId: string) => void;
+  loading?: boolean;
+  products?: ProductVariant[];
+  title?: string;
 };
 
 type SortTypes =
@@ -28,7 +36,12 @@ type SortTypes =
   | 'Price: lowest to high'
   | 'Price: highest to low';
 
-export default function Collection({onProductPress}: CollectionProps) {
+export default function Collection({
+  onProductPress,
+  loading = true,
+  products = [],
+  title,
+}: CollectionProps) {
   const {sizes} = useTheme();
   const [layoutView, setLayoutView] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSort] = useState<SortTypes>('Popular');
@@ -49,7 +62,7 @@ export default function Collection({onProductPress}: CollectionProps) {
           style={{
             paddingHorizontal: sizes.global.padding,
           }}>
-          Women's tops
+          {title}
         </H2>
         <FlatList
           contentContainerStyle={{
@@ -82,9 +95,9 @@ export default function Collection({onProductPress}: CollectionProps) {
         </View>
         <Separator />
 
-        <FlatList
+        <FlatList<ProductVariant>
           key={`list-${layoutView}`}
-          data={[1, 2, 3, 4]}
+          data={products}
           numColumns={layoutView === 'grid' ? 2 : 1}
           style={{}}
           contentContainerStyle={{
@@ -93,26 +106,36 @@ export default function Collection({onProductPress}: CollectionProps) {
           }}
           renderItem={({item, index}) => {
             // TODO: this lists are temp, only for test needs
-            const productsList = [
-              require('../assets/products/list/1.png'),
-              require('../assets/products/list/2.png'),
-              require('../assets/products/list/3.png'),
-              require('../assets/products/list/4.png'),
-            ];
-            const productsGrid = [
-              require('../assets/products/grid/1.png'),
-              require('../assets/products/grid/2.png'),
-              require('../assets/products/grid/2.png'),
-              require('../assets/products/grid/1.png'),
-            ];
-            const productImage =
-              layoutView === 'grid' ? productsGrid[index] : productsList[index];
+            // const productsList = [
+            //   require('../assets/products/list/1.png'),
+            //   require('../assets/products/list/2.png'),
+            //   require('../assets/products/list/3.png'),
+            //   require('../assets/products/list/4.png'),
+            // ];
+            // const productsGrid = [
+            //   require('../assets/products/grid/1.png'),
+            //   require('../assets/products/grid/2.png'),
+            //   require('../assets/products/grid/2.png'),
+            //   require('../assets/products/grid/1.png'),
+            // ];
+            // const productImage =
+            //   layoutView === 'grid' ? productsGrid[index] : productsList[index];
+            const assets = [];
+            if (item?.assets) {
+              assets.push(...item?.assets);
+            }
+            if (item.product?.assets) {
+              assets.push(...item.product?.assets);
+            }
             return (
               <ProductItem
                 delayedTime={index * 200}
-                productImage={productImage}
+                productImage={assets[0]?.source}
                 productLayoutType={layoutView}
-                onProductPress={onProductPress}
+                onProductPress={() => onProductPress?.(item.productId)}
+                name={item.name}
+                description={item.product.description}
+                price={`${item.price}`}
               />
             );
           }}

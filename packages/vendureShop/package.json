@@ -5,13 +5,14 @@
   "scripts": {
     "dev:server": "ts-node ./src/index.ts",
     "dev:worker": "ts-node ./src/index-worker.ts",
-    "dev": "concurrently npm:dev:*",
+    "dev": "concurrently 'npm:dev:*'",
     "build": "tsc",
     "start:server": "node ./dist/index.js",
     "start:worker": "node ./dist/index-worker.js",
-    "start": "concurrently npm:start:*"
+    "start": "concurrently 'npm:start:*'"
   },
   "dependencies": {
+    "@nestjs/graphql": "^12.2.2",
     "@vendure/admin-ui-plugin": "3.1.1",
     "@vendure/asset-server-plugin": "3.1.1",
     "@vendure/core": "3.1.1",

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, ImageSourcePropType, TouchableOpacity, View} from 'react-native';
-import Text, {SmText} from '../atoms/Text';
+import Text, {PsmText, SmText} from '../atoms/Text';
 import Stars from './Stars';
 import {useTheme} from '../hooks/theme';
 import Favorite from '../atoms/Favorite';
@@ -11,6 +11,9 @@ export default function ProductGridItem({
   productImage,
   delayedTime = 0,
   onProductPress,
+  name = 'Product Name',
+  description = 'Product Description',
+  price = '$10.00',
 }: ProductItemProps) {
   const {sizes} = useTheme();
   const index = delayedTime / 200;
@@ -20,13 +23,16 @@ export default function ProductGridItem({
         exiting={FadeOut}
         entering={(index % 2 === 0 ? BounceIn : BounceIn).delay(delayedTime)}
         style={{
-          // width: '100%',
           flexDirection: 'column',
-          padding: sizes.s,
-          marginBottom: sizes.s,
+          margin: sizes.s,
+          width: 160,
+          overflow: 'hidden',
         }}>
         <View>
-          <Image source={productImage} style={{width: 160, height: 180}} />
+          <Image
+            source={{uri: productImage}}
+            style={{width: 160, height: 180}}
+          />
           <Favorite
             style={{
               position: 'absolute',
@@ -35,17 +41,30 @@ export default function ProductGridItem({
             }}
           />
         </View>
-        <View style={{flex: 1, paddingLeft: sizes.s}}>
-          <View style={{flexDirection: 'column-reverse'}}>
-            <Text style={{fontWeight: '600', paddingTop: sizes.xs}}>
-              Product name
+        <View style={{paddingLeft: sizes.s, flex: 1}}>
+          <View
+            style={{
+              flexDirection: 'column-reverse',
+            }}>
+            <Text
+              style={{fontWeight: '600', paddingTop: sizes.xs}}
+              numberOfLines={1}>
+              {name}
             </Text>
-            <SmText style={{paddingBottom: sizes.xs}}>
-              Product description
+            <SmText
+              style={{paddingBottom: sizes.xs}}
+              numberOfLines={1}
+              ellipsizeMode="tail">
+              {description.slice(0, 40)}
             </SmText>
             <Stars style={{marginVertical: sizes.xs}} />
           </View>
-          <Text style={{fontWeight: '600'}}>$100</Text>
+          <PsmText style={{fontWeight: '600'}}>
+            $
+            {Number(price)
+              .toFixed(2)
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          </PsmText>
         </View>
       </Animated.View>
     </TouchableOpacity>

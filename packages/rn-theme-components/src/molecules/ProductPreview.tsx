@@ -6,15 +6,24 @@ import Text, {PsmText, SmText} from '../atoms/Text';
 import {useTheme} from '../hooks/theme';
 
 export type ProductPreviewProps = {
-  productImage: ImageSourcePropType;
   onProductPress?: () => void;
+  product: ProductType;
+};
+
+export type ProductType = {
+  title: string;
+  description: string;
+  price: number;
+  productImage: string;
+  id: string;
 };
 
 export default function ProductPreview({
-  productImage,
+  product,
   onProductPress,
 }: ProductPreviewProps) {
   const {sizes, colors} = useTheme();
+  // console.log(product.productImage);
   return (
     <TouchableOpacity onPress={onProductPress}>
       <View
@@ -24,7 +33,10 @@ export default function ProductPreview({
           marginRight: sizes.global.padding,
         }}>
         <View style={{justifyContent: 'flex-end'}}>
-          <Image source={productImage} resizeMode="cover" />
+          <Image
+            source={{uri: product.productImage, width: 148, height: 184}}
+            resizeMode="cover"
+          />
           <View
             style={{
               position: 'absolute',
@@ -36,17 +48,20 @@ export default function ProductPreview({
           </View>
         </View>
         <Stars />
-        <SmText style={{color: colors.secondary}}>Doroth Perkins</SmText>
-        <Text style={{fontWeight: 600}}>Evening Dress</Text>
+        <SmText style={{color: colors.secondary}} numberOfLines={1}>
+          {product.description}
+        </SmText>
+        <Text style={{fontWeight: 600}} numberOfLines={1}>
+          {product.title}
+        </Text>
         <PsmText style={{color: colors.tertiary}}>
-          <SmText
+          {/* <SmText
             style={{
               textDecorationLine: 'line-through',
               color: colors.secondary,
             }}>
-            $15
-          </SmText>
-          {' $12'}
+            $15 */}
+          ${product.price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
         </PsmText>
       </View>
     </TouchableOpacity>

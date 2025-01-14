@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, ImageSourcePropType, TouchableOpacity, View} from 'react-native';
-import Text, {SmText} from '../atoms/Text';
+import Text, {PsmText, SmText} from '../atoms/Text';
 import Stars from './Stars';
 import {useTheme} from '../hooks/theme';
 import Favorite from '../atoms/Favorite';
@@ -15,6 +15,9 @@ export default function ProductListItem({
   productImage,
   delayedTime = 0,
   onProductPress,
+  name = 'Product Name',
+  description = 'Product Description',
+  price = '$10.00',
 }: ProductItemProps) {
   const {sizes} = useTheme();
   const index = delayedTime / 200;
@@ -32,19 +35,27 @@ export default function ProductListItem({
           marginBottom: sizes.s,
         }}>
         <View>
-          <Image source={productImage} style={{width: 104, height: 104}} />
+          <Image
+            source={{uri: productImage}}
+            style={{width: 104, height: 104}}
+          />
         </View>
         <View style={{flex: 1, paddingLeft: sizes.s}}>
           <View style={{flexDirection: 'column'}}>
             <Text style={{fontWeight: '600', paddingTop: sizes.xs}}>
-              Product name
+              {name}
             </Text>
-            <SmText style={{paddingBottom: sizes.xs}}>
-              Product description
+            <SmText style={{paddingBottom: sizes.xs}} numberOfLines={2}>
+              {description}
             </SmText>
             <Stars style={{marginVertical: sizes.xs}} />
           </View>
-          <Text style={{fontWeight: '600'}}>$100</Text>
+          <PsmText style={{fontWeight: '600'}}>
+            $
+            {Number(price)
+              .toFixed(2)
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+          </PsmText>
         </View>
         <View style={{alignContent: 'flex-end', justifyContent: 'flex-end'}}>
           <Favorite />
