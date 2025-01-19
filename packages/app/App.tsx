@@ -17,15 +17,7 @@ import Routes from './src/routes';
 
 import {client} from './src/client';
 
-// const LoadQuery = ({children}) => {
-//   const {loading, error, data} = useQuery(graphql(GET_COLLECTIONS));
-//   console.log({data});
-//   useEffect(() => {
-//     console.log('changed status ' + loading + ' ' + error);
-//   }, [loading]);
-
-//   return <>{children}</>;
-// };
+// import 'product-flow';
 
 function App(): React.JSX.Element {
   const {theme} = useDarkMode();

@@ -28,7 +28,6 @@ export default function ProductPage({route}: any) {
     });
   }, [navigation, data]);
 
-  console.log('ASSETS', data?.product?.assets);
   return (
     <Product
       assets={data?.product?.assets.map(asset => asset.source) ?? []}

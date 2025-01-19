@@ -23,7 +23,6 @@ export default function ProductPreview({
   onProductPress,
 }: ProductPreviewProps) {
   const {sizes, colors} = useTheme();
-  // console.log(product.productImage);
   return (
     <TouchableOpacity onPress={onProductPress}>
       <View

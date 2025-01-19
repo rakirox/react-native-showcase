@@ -26,6 +26,7 @@
     "react-native-reanimated": "3.16.6",
     "react-native-safe-area-context": "5.1.0",
     "react-native-screens": "4.4.0",
+    "remove-markdown": "^0.6.0",
     "rn-theme-components": "0.0.1"
   },
   "devDependencies": {
@@ -42,7 +43,7 @@
     "@react-native/eslint-config": "0.76.5",
     "@react-native/metro-config": "0.76.5",
     "@react-native/typescript-config": "0.76.5",
-    "@types/react": "18.2.6",
+    "@types/react": "18.3.12",
     "@types/react-test-renderer": "18.0.0",
     "babel-jest": "29.6.3",
     "eslint": "8.19.0",

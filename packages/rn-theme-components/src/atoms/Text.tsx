@@ -1,22 +1,22 @@
 import React from 'react';
 
-import {
-  Text as RNText,
-  TextProps as RNTextProps,
-  TextStyle,
-} from 'react-native';
+import {TextProps as RNTextProps, TextStyle} from 'react-native';
 import {useTheme} from '../hooks/theme';
+import Animated, {AnimateProps} from 'react-native-reanimated';
+import {type AnimatedText} from 'react-native-reanimated/lib/typescript/component/Text';
 
-export default function Text(props: RNTextProps) {
+export interface TextType extends AnimateProps<RNTextProps> {}
+
+export default function Text(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle = {
     fontSize: sizes.font.p,
     color: colors.text,
   };
-  return <RNText {...props} style={[textStyle, props.style ?? {}]} />;
+  return <Animated.Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
 
-export function H1(props: RNTextProps) {
+export function H1(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.h1,
@@ -26,7 +26,7 @@ export function H1(props: RNTextProps) {
   return <Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
 
-export function H2(props: RNTextProps) {
+export function H2(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.h2,
@@ -36,7 +36,7 @@ export function H2(props: RNTextProps) {
   return <Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
 
-export function H3(props: RNTextProps) {
+export function H3(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.h3,
@@ -45,7 +45,7 @@ export function H3(props: RNTextProps) {
   };
   return <Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
-export function H4(props: RNTextProps) {
+export function H4(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.h4,
@@ -54,7 +54,7 @@ export function H4(props: RNTextProps) {
   };
   return <Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
-export function H5(props: RNTextProps) {
+export function H5(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.h5,
@@ -64,7 +64,7 @@ export function H5(props: RNTextProps) {
   return <Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
 
-export function SmText(props: RNTextProps) {
+export function SmText(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.sm,
@@ -73,7 +73,7 @@ export function SmText(props: RNTextProps) {
   };
   return <Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
-export function PsmText(props: RNTextProps) {
+export function PsmText(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.psm,
@@ -82,7 +82,7 @@ export function PsmText(props: RNTextProps) {
   };
   return <Text {...props} style={[textStyle, props.style ?? {}]} />;
 }
-export function XsText(props: RNTextProps) {
+export function XsText(props: TextType) {
   const {colors, sizes} = useTheme();
   const textStyle: TextStyle = {
     fontSize: sizes.font.xs,

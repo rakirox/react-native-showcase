@@ -24,7 +24,8 @@ export default function ProductGridItem({
         entering={(index % 2 === 0 ? BounceIn : BounceIn).delay(delayedTime)}
         style={{
           flexDirection: 'column',
-          margin: sizes.s,
+          marginVertical: sizes.s,
+          marginHorizontal: sizes.global.padding,
           width: 160,
           overflow: 'hidden',
         }}>
@@ -59,12 +60,7 @@ export default function ProductGridItem({
             </SmText>
             <Stars style={{marginVertical: sizes.xs}} />
           </View>
-          <PsmText style={{fontWeight: '600'}}>
-            $
-            {Number(price)
-              .toFixed(2)
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          </PsmText>
+          <PsmText style={{fontWeight: '600'}}>{price}</PsmText>
         </View>
       </Animated.View>
     </TouchableOpacity>

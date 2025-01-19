@@ -8,13 +8,11 @@ import ProductPreview, {ProductType} from './ProductPreview';
 
 export interface CollectionHorizontalPreviewProps
   extends CollectionPreviewHeaderProps {
-  productImage: ImageSourcePropType; // image of product exmample (thumnail)
   products?: ProductType[];
   onProductPress?: (productId: string) => void;
 }
 
 export default function CollectionHorizontalPreview({
-  productImage,
   products = [],
   onProductPress,
   ...props

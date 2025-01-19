@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ImageSourcePropType, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import Text, {PsmText, SmText} from '../atoms/Text';
 import Stars from './Stars';
 import {useTheme} from '../hooks/theme';
@@ -31,7 +31,7 @@ export default function ProductListItem({
         style={{
           width: '100%',
           flexDirection: 'row',
-          padding: sizes.s,
+          paddingHorizontal: sizes.global.padding,
           marginBottom: sizes.s,
         }}>
         <View>
@@ -50,12 +50,7 @@ export default function ProductListItem({
             </SmText>
             <Stars style={{marginVertical: sizes.xs}} />
           </View>
-          <PsmText style={{fontWeight: '600'}}>
-            $
-            {Number(price)
-              .toFixed(2)
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          </PsmText>
+          <PsmText style={{fontWeight: '600'}}>{price}</PsmText>
         </View>
         <View style={{alignContent: 'flex-end', justifyContent: 'flex-end'}}>
           <Favorite />

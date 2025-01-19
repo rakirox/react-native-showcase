@@ -12,6 +12,7 @@ import {
   Text,
   Icon,
   Favorite,
+  Separator,
 } from 'rn-theme-components';
 
 export type ProductProps = {
@@ -106,25 +107,30 @@ export default function Product({
             style={{width: '100%', height: 48}}
           />
         </View>
-        <FlatList
-          ItemSeparatorComponent={() => (
-            <View
-              style={{width: '100%', height: 0.4, backgroundColor: '#9B9B9B'}}
-            />
-          )}
-          ListHeaderComponent={() => (
-            <View
-              style={{width: '100%', height: 0.4, backgroundColor: '#9B9B9B'}}
-            />
-          )}
-          data={['Shipping Info', 'Support']}
-          renderItem={({item}) => <SectionDetail title={item} />}
-        />
+        <Separator />
+        <SectionDetail title="hipping Info" />
+        <Separator />
+        <SectionDetail title="Support" />
+        <Separator />
         <CollectionHorizontalPreview
-          productImage={require('../assets/product.png')}
           title="You can also like this"
+          // subtitle={removeMd(item.collection.description)}
           actionButtonLabel="12 items"
           onuButtonPress={() => console.log('navigating to somewhere')}
+          // onProductPress={onProductPress}
+          // products={item.collection.productVariants.items.map(
+          //   (pVariant: ProductVariant) => {
+          //     const assets = [];
+          //     assets.push(...pVariant.assets, ...pVariant.product.assets);
+          //     return {
+          //       id: pVariant.id,
+          //       title: pVariant.name,
+          //       description: pVariant.product.description,
+          //       price: pVariant.price,
+          //       productImage: assets[0]?.source,
+          //     } as ProductType;
+          //   },
+          // )}
         />
       </ScrollView>
     </>

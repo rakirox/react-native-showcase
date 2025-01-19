@@ -1,13 +1,18 @@
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ProductStack} from 'product-flow';
+import {ProductStack, ProductStackParamList} from 'product-flow';
 
-const Tab = createBottomTabNavigator();
+export type AppStackParamList = {
+  HomeStack: ProductStackParamList;
+};
+
+const Tab = createBottomTabNavigator<AppStackParamList>();
 
 export default function Routes() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="HomeStack"
         component={ProductStack}
         options={{
           header: () => undefined,

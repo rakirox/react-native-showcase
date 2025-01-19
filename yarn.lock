@@ -3910,7 +3910,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-async-storage/async-storage@npm:^2.1.0":
+"@react-native-async-storage/async-storage@npm:2.1.0, @react-native-async-storage/async-storage@npm:^2.1.0":
   version: 2.1.0
   resolution: "@react-native-async-storage/async-storage@npm:2.1.0"
   dependencies:
@@ -4817,31 +4817,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.6":
-  version: 18.2.6
-  resolution: "@types/react@npm:18.2.6"
+"@types/react@npm:18.3.12":
+  version: 18.3.12
+  resolution: "@types/react@npm:18.3.12"
   dependencies:
     "@types/prop-types": "npm:*"
-    "@types/scheduler": "npm:*"
     csstype: "npm:^3.0.2"
-  checksum: 10c0/7740541afde84a50c557e576dd564a861b45ad436d1c3ed33496d70046a6eb734bfe7f7f18995f88bdc50be0d295c2b878f705a6b9573cc0781e11ea58470139
+  checksum: 10c0/8bae8d9a41619804561574792e29112b413044eb0d53746dde2b9720c1f9a59f71c895bbd7987cd8ce9500b00786e53bc032dced38cddf42910458e145675290
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18, @types/react@npm:^18.2.6":
+"@types/react@npm:^18":
   version: 18.3.18
   resolution: "@types/react@npm:18.3.18"
   dependencies:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10c0/8fb2b00672072135d0858dc9db07873ea107cc238b6228aaa2a9afd1ef7a64a7074078250db38afbeb19064be8ea6af5eac32d404efdd5f45e093cc4829d87f8
-  languageName: node
-  linkType: hard
-
-"@types/scheduler@npm:*":
-  version: 0.23.0
-  resolution: "@types/scheduler@npm:0.23.0"
-  checksum: 10c0/5cf7f2ba3732b74877559eb20b19f95fcd0a20c17dcb20e75a7ca7c7369cd455aeb2d406b3ff5a38168a9750da3bad78dd20d96d11118468b78f4959b8e56090
   languageName: node
   linkType: hard
 
@@ -5540,7 +5532,7 @@ __metadata:
     "@react-navigation/bottom-tabs": "npm:7.2.0"
     "@react-navigation/native": "npm:7.0.14"
     "@react-navigation/native-stack": "npm:7.2.0"
-    "@types/react": "npm:18.2.6"
+    "@types/react": "npm:18.3.12"
     "@types/react-test-renderer": "npm:18.0.0"
     babel-jest: "npm:29.6.3"
     eslint: "npm:8.19.0"
@@ -5556,6 +5548,7 @@ __metadata:
     react-native-safe-area-context: "npm:5.1.0"
     react-native-screens: "npm:4.4.0"
     react-test-renderer: "npm:18.3.1"
+    remove-markdown: "npm:^0.6.0"
     rn-theme-components: "npm:0.0.1"
     typescript: "npm:5.0.4"
   languageName: unknown
@@ -13278,6 +13271,7 @@ __metadata:
     "@graphql-codegen/cli": "npm:5.0.3"
     "@graphql-codegen/client-preset": "npm:4.5.1"
     "@graphql-codegen/introspection": "npm:4.0.3"
+    "@react-native-async-storage/async-storage": "npm:2.1.0"
     "@react-native-community/cli": "npm:15.0.1"
     "@react-native-community/cli-platform-android": "npm:15.0.1"
     "@react-native-community/cli-platform-ios": "npm:15.0.1"
@@ -13288,7 +13282,7 @@ __metadata:
     "@react-navigation/bottom-tabs": "npm:7.2.0"
     "@react-navigation/native": "npm:7.0.14"
     "@react-navigation/native-stack": "npm:7.2.0"
-    "@types/react": "npm:^18.2.6"
+    "@types/react": "npm:18.3.12"
     "@types/react-test-renderer": "npm:^18.0.0"
     babel-jest: "npm:^29.6.3"
     eslint: "npm:^8.19.0"
@@ -13297,10 +13291,13 @@ __metadata:
     prettier: "npm:2.8.8"
     react: "npm:18.3.1"
     react-native: "npm:0.76.5"
+    react-native-reanimated: "npm:3.16.6"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:5.0.4"
+    zustand: "npm:^5.0.3"
   peerDependencies:
     "@gorhom/bottom-sheet": 5
+    "@react-native-async-storage/async-storage": 2.1.0
     rn-theme-components: 0.0.1
   languageName: unknown
   linkType: soft
@@ -13903,6 +13900,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remove-markdown@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "remove-markdown@npm:0.6.0"
+  checksum: 10c0/9a0cdae00577c236df278c1b6b9e5f35f7c712c8356fd47908859525652c20cc10e2fa2d01a535b5d5bdb9a796312b31ce06652b080216d49ba0ce001e190601
+  languageName: node
+  linkType: hard
+
 "remove-trailing-separator@npm:^1.0.1":
   version: 1.1.0
   resolution: "remove-trailing-separator@npm:1.1.0"
@@ -14119,7 +14123,7 @@ __metadata:
     "@react-native/eslint-config": "npm:0.76.5"
     "@react-native/metro-config": "npm:0.76.5"
     "@react-native/typescript-config": "npm:0.76.5"
-    "@types/react": "npm:^18.2.6"
+    "@types/react": "npm:18.3.12"
     "@types/react-test-renderer": "npm:^18.0.0"
     babel-jest: "npm:^29.6.3"
     eslint: "npm:^8.19.0"
@@ -16465,5 +16469,26 @@ __metadata:
   version: 0.8.15
   resolution: "zen-observable@npm:0.8.15"
   checksum: 10c0/71cc2f2bbb537300c3f569e25693d37b3bc91f225cefce251a71c30bc6bb3e7f8e9420ca0eb57f2ac9e492b085b8dfa075fd1e8195c40b83c951dd59c6e4fbf8
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "zustand@npm:5.0.3"
+  peerDependencies:
+    "@types/react": ">=18.0.0"
+    immer: ">=9.0.6"
+    react: ">=18.0.0"
+    use-sync-external-store: ">=1.2.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+    use-sync-external-store:
+      optional: true
+  checksum: 10c0/dad96c6c123fda088c583d5df6692e9245cd207583078dc15f93d255a67b0f346bad4535545c98852ecde93d254812a0c799579dfde2ab595016b99fbe20e4d5
   languageName: node
   linkType: hard

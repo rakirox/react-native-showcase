@@ -3,12 +3,14 @@ import {graphql} from '../gql';
 
 const GET_COLLECTIONS = graphql(`
   query Collections {
-    collections {
+    collections(options: {topLevelOnly: true}) {
       totalItems
       items {
         id
+        slug
         name
         description
+        position
         productVariants {
           items {
             id
