@@ -6,18 +6,20 @@ import Text, {PsmText, SmText} from './Text';
 export type FilterButtonProps = {
   onButtonPress?: () => void;
   label?: string;
+  selected?: boolean;
 };
 
 export default function FilterButton({
   onButtonPress,
   label,
+  selected = false,
 }: FilterButtonProps) {
-  const {sizes} = useTheme();
+  const {sizes, colors} = useTheme();
   return (
     <TouchableOpacity onPress={onButtonPress}>
       <View
         style={{
-          backgroundColor: 'black',
+          backgroundColor: selected ? colors.primary : 'black',
           justifyContent: 'center',
           alignItems: 'center',
           paddingHorizontal: sizes.m,

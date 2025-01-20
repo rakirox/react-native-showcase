@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Text from '../atoms/Text';
 import {FlatList, TouchableOpacity} from 'react-native';
 import {useTheme} from '../hooks/theme';
@@ -20,16 +20,11 @@ export default function PickerList({
   options,
 }: PickerListProps) {
   const {sizes} = useTheme();
-  // const [currentSelected, setCurrentSelected] = useState<OptionType>(selected);
-  // useEffect(() => {
-  //   setCurrentSelected(selected);
-  // }, [selected]);
   return (
     <>
       <Text style={{alignSelf: 'center', fontWeight: '600'}}>Sort by</Text>
       <FlatList<OptionType>
         style={{height: '100%'}}
-        // data={['Newest', 'Price: lowest to high', 'Price: highest to low']}
         data={options}
         renderItem={({item}) => {
           const isSelected = selected === item.value;

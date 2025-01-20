@@ -14,6 +14,9 @@ import {
   CollectionHorizontalPreview,
   ProductType,
   PickerList,
+  Text,
+  H5,
+  CircleColorOption,
 } from 'rn-theme-components';
 import Animated, {
   runOnJS,
@@ -110,7 +113,8 @@ export default function Collection({
   const [isFiltersVisible, setFiltersVisible] = useState(true);
   const titleHeight = useSharedValue(TITLE_HEIGHT);
   const filtersHeight = useSharedValue(FILTERS_HEIGHT);
-  const bottomSheetRef = useRef<BottomSheet>(null);
+  const bottomSortSheetRef = useRef<BottomSheet>(null);
+  const bottomFiltersSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['30%', '50%'], []);
   const animatedTitleStyle = useAnimatedStyle(() => {
     return {
@@ -123,20 +127,20 @@ export default function Collection({
     };
   });
   const onSortPress = useCallback(() => {
-    bottomSheetRef?.current?.expand();
-  }, [bottomSheetRef]);
+    bottomSortSheetRef?.current?.expand();
+  }, [bottomSortSheetRef]);
   const onLayoutPress = useCallback(() => {
     setLayoutView(layoutView === 'grid' ? 'list' : 'grid');
   }, [layoutView, setLayoutView]);
-  const handleFiltersRemove = useCallback(() => {
-    filtersHeight.value = withTiming(0, {duration: 500}, () => {
-      runOnJS(setFiltersVisible)(false);
-    });
-  }, [filtersHeight, setFiltersVisible]);
-  const handleFiltersAdd = useCallback(() => {
-    setFiltersVisible(true);
-    filtersHeight.value = withTiming(FILTERS_HEIGHT, {duration: 500});
-  }, [setFiltersVisible]);
+  // const handleFiltersRemove = useCallback(() => {
+  //   filtersHeight.value = withTiming(0, {duration: 500}, () => {
+  //     runOnJS(setFiltersVisible)(false);
+  //   });
+  // }, [filtersHeight, setFiltersVisible]);
+  // const handleFiltersAdd = useCallback(() => {
+  //   setFiltersVisible(true);
+  //   filtersHeight.value = withTiming(FILTERS_HEIGHT, {duration: 500});
+  // }, [setFiltersVisible]);
 
   const handleTitleRemove = useCallback(() => {
     titleHeight.value = withTiming(0, {duration: 500}, () => {
@@ -154,13 +158,10 @@ export default function Collection({
       withTiming(TITLE_HEIGHT, {duration: 500}),
     );
   }, [setTitleVisible, onTitleToggle, titleHeight]);
-  const onToggleFilters = useCallback(() => {
-    if (isFiltersVisible) {
-      handleFiltersRemove();
-    } else {
-      handleFiltersAdd();
-    }
-  }, [handleFiltersRemove, handleFiltersAdd, isFiltersVisible]);
+  const onFilterOpen = useCallback(() => {
+    bottomFiltersSheetRef.current?.expand();
+  }, []);
+  // }, [handleFiltersRemove, handleFiltersAdd, isFiltersVisible]);
   const onFilterAction = (facet: FacetValueResult) => {
     const newFilters: FacetValueResult[] = [...filters];
     const index = newFilters.findIndex(
@@ -205,12 +206,17 @@ export default function Collection({
                 alignItems: 'center',
               }}
               horizontal
-              data={facets}
+              data={facets?.filter(
+                fa => fa.facetValue.facet.code === 'category',
+              )}
               showsHorizontalScrollIndicator={false}
               renderItem={({item}) => (
                 <FilterButton
                   onButtonPress={() => onFilterAction(item)}
                   label={item.facetValue.code}
+                  selected={filters.some(
+                    f => f.facetValue.code === item.facetValue.code,
+                  )}
                 />
               )}
             />
@@ -221,7 +227,7 @@ export default function Collection({
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <ActionIcon label="Filters" icon="filter" onPress={onToggleFilters} />
+          <ActionIcon label="Filters" icon="filter" onPress={onFilterOpen} />
           <ActionIcon label={sortBy.label} icon="sort" onPress={onSortPress} />
           <ActionIcon icon={layoutView} onPress={onLayoutPress} />
         </View>
@@ -291,26 +297,54 @@ export default function Collection({
         />
       </View>
       <BottomSheet
-        ref={bottomSheetRef}
+        ref={bottomSortSheetRef}
         enablePanDownToClose
         index={-1}
         snapPoints={snapPoints}
         backdropComponent={BottomSheetBackdrop}
         style={{
           borderRadius: 34,
-          borderColor: 'orange',
           overflow: 'hidden',
         }}>
         <BottomSheetView style={{paddingBottom: 10}}>
           <PickerList
             onOptionSelected={option => {
               setSortOption(option as SortOption);
-              bottomSheetRef.current?.close();
+              bottomSortSheetRef.current?.close();
               onSort?.(option as SortOption);
             }}
             selected={sortBy.value}
             options={sortOptions}
           />
+        </BottomSheetView>
+      </BottomSheet>
+      <BottomSheet
+        ref={bottomFiltersSheetRef}
+        enablePanDownToClose
+        index={0}
+        snapPoints={snapPoints}
+        backdropComponent={BottomSheetBackdrop}
+        style={{
+          borderRadius: 34,
+          overflow: 'hidden',
+        }}>
+        <BottomSheetView style={{paddingBottom: 10}}>
+          <View style={{padding: sizes.global.padding}}>
+            <Text style={{alignSelf: 'center', fontWeight: '600'}}>
+              Filters
+            </Text>
+            <H5>Colors</H5>
+            <View
+              style={{
+                padding: sizes.global.padding,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}>
+              <CircleColorOption color="red" />
+              <CircleColorOption color="blue" />
+              <CircleColorOption color="orange" selected />
+            </View>
+          </View>
         </BottomSheetView>
       </BottomSheet>
     </>

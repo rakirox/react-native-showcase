@@ -41,3 +41,7 @@ export {
   OptionType,
   PickerListProps,
 } from './src/organisms/PickerList';
+export {
+  default as CircleColorOption,
+  CircleColorOptionType,
+} from './src/molecules/CircleColorOption';

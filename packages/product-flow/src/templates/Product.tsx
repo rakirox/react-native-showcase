@@ -62,7 +62,7 @@ export default function Product({
                 minWidth: 130,
               }}>
               <Text>Size</Text>
-              <Icon type="dropdown" />
+              <Icon iconType="dropdown" />
             </View>
           </View>
           <View
@@ -82,7 +82,7 @@ export default function Product({
                 minWidth: 130,
               }}>
               <Text>Size</Text>
-              <Icon type="dropdown" />
+              <Icon iconType="dropdown" />
             </View>
           </View>
           <View
