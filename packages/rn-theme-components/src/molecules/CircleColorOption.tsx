@@ -15,21 +15,21 @@ export default function CircleColorOption({
   return (
     <View
       style={{
-        width: 45,
+        width: 44,
         height: 45,
         backgroundColor: 'white',
         borderWidth: selected ? 1 : 0,
         borderColor: colors.primary,
-        borderRadius: 90,
+        borderRadius: '100%',
         alignItems: 'center',
         justifyContent: 'center',
       }}>
       <View
         style={{
-          width: 35,
+          width: 36,
           height: 35,
           backgroundColor: color,
-          borderRadius: 90,
+          borderRadius: '100%',
         }}
       />
     </View>

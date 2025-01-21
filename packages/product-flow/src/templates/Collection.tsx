@@ -3,7 +3,7 @@ import BottomSheet, {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 import {
   ActionIcon,
   FilterButton,
@@ -17,9 +17,15 @@ import {
   Text,
   H5,
   CircleColorOption,
+  SmText,
+  Icon,
+  PickerColor,
 } from 'rn-theme-components';
 import Animated, {
+  FadeIn,
   runOnJS,
+  SlideInLeft,
+  SlideInRight,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
@@ -121,11 +127,6 @@ export default function Collection({
       height: titleHeight.value,
     };
   });
-  const animatedFiltersStyle = useAnimatedStyle(() => {
-    return {
-      height: filtersHeight.value,
-    };
-  });
   const onSortPress = useCallback(() => {
     bottomSortSheetRef?.current?.expand();
   }, [bottomSortSheetRef]);
@@ -198,40 +199,45 @@ export default function Collection({
           </H2>
         )}
         {isFiltersVisible && (
-          <Animated.View style={animatedFiltersStyle}>
-            <FlatList<FacetValueResult>
-              contentContainerStyle={{
-                padding: sizes.global.padding,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              horizontal
-              data={facets?.filter(
-                fa => fa.facetValue.facet.code === 'category',
-              )}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({item}) => (
-                <FilterButton
-                  onButtonPress={() => onFilterAction(item)}
-                  label={item.facetValue.code}
-                  selected={filters.some(
-                    f => f.facetValue.code === item.facetValue.code,
-                  )}
-                />
-              )}
-            />
-          </Animated.View>
+          <FlatList<FacetValueResult>
+            style={{height: 70}}
+            contentContainerStyle={{
+              padding: sizes.global.padding,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            horizontal
+            data={facets?.filter(fa => fa.facetValue.facet.code === 'category')}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => `facet-group-${item.facetValue.id}`}
+            renderItem={({item, index}) => (
+              <FilterButton
+                entering={SlideInRight.delay(100 * index)}
+                onButtonPress={() => onFilterAction(item)}
+                label={item.facetValue.code}
+                selected={filters.some(
+                  f => f.facetValue.code === item.facetValue.code,
+                )}
+              />
+            )}
+          />
         )}
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <ActionIcon label="Filters" icon="filter" onPress={onFilterOpen} />
-          <ActionIcon label={sortBy.label} icon="sort" onPress={onSortPress} />
-          <ActionIcon icon={layoutView} onPress={onLayoutPress} />
-        </View>
-        <Separator />
+        <Animated.View entering={FadeIn.delay(400)}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <ActionIcon label="Filters" icon="filter" onPress={onFilterOpen} />
+            <ActionIcon
+              label={sortBy.label}
+              icon="sort"
+              onPress={onSortPress}
+            />
+            <ActionIcon icon={layoutView} onPress={onLayoutPress} />
+          </View>
+        </Animated.View>
+        <Separator style={{marginBottom: 0}} entering={SlideInRight} />
 
         <FlatList<SearchResult>
           onScroll={event => {
@@ -321,7 +327,7 @@ export default function Collection({
       <BottomSheet
         ref={bottomFiltersSheetRef}
         enablePanDownToClose
-        index={0}
+        index={-1}
         snapPoints={snapPoints}
         backdropComponent={BottomSheetBackdrop}
         style={{
@@ -333,17 +339,22 @@ export default function Collection({
             <Text style={{alignSelf: 'center', fontWeight: '600'}}>
               Filters
             </Text>
-            <H5>Colors</H5>
-            <View
-              style={{
-                padding: sizes.global.padding,
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-              }}>
-              <CircleColorOption color="red" />
-              <CircleColorOption color="blue" />
-              <CircleColorOption color="orange" selected />
-            </View>
+            <PickerColor />
+            {/* <PickerColor  /> */}
+            <TouchableOpacity onPress={() => {}}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  paddingVertical: sizes.global.padding,
+                }}>
+                <View style={{flex: 1}}>
+                  <H5>Brand</H5>
+                  <SmText>addidas ....</SmText>
+                </View>
+                <Icon iconType="arrow-right" />
+              </View>
+            </TouchableOpacity>
           </View>
         </BottomSheetView>
       </BottomSheet>

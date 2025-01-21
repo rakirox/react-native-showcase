@@ -1,10 +1,10 @@
 import React from 'react';
-import {Image, ImageSourcePropType, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
+import Animated, {BounceIn, FadeOut} from 'react-native-reanimated';
 import Text, {PsmText, SmText} from '../atoms/Text';
 import Stars from './Stars';
 import {useTheme} from '../hooks/theme';
 import Favorite from '../atoms/Favorite';
-import Animated, {BounceIn, FadeOut} from 'react-native-reanimated';
 import {ProductItemProps} from './ProductItem';
 
 export default function ProductGridItem({

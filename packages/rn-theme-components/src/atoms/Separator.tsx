@@ -1,15 +1,22 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, ViewProps} from 'react-native';
+import {useTheme} from '../hooks/theme';
+import Animated, {AnimatedProps} from 'react-native-reanimated';
 
-export default function Separator() {
+export default function Separator({style, ...props}: AnimatedProps<ViewProps>) {
+  const {colors} = useTheme();
   return (
-    <View
-      style={{
-        height: 1,
-        backgroundColor: '#000',
-        opacity: 0.1,
-        marginBottom: 10,
-      }}
+    <Animated.View
+      style={[
+        {
+          height: 1,
+          width: '100%',
+          backgroundColor: colors.grey300,
+          marginBottom: 10,
+        },
+        style,
+      ]}
+      {...props}
     />
   );
 }

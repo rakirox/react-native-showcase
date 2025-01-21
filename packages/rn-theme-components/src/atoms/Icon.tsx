@@ -12,7 +12,8 @@ type IconType =
   | 'favorite-inactive'
   | 'favorite-active'
   | 'profile-inactive'
-  | 'profile-active';
+  | 'profile-active'
+  | 'arrow-right';
 
 interface IconPropType extends ImageProps {
   iconType: IconType;
@@ -43,6 +44,8 @@ export default function Icon({iconType, ...props}: IconPropType) {
         return require('../assets/icons/profile_active.png');
       case 'profile-inactive':
         return require('../assets/icons/profile_inactive.png');
+      case 'arrow-right':
+        return require('../assets/icons/arrow_right.png');
       default:
         break;
     }

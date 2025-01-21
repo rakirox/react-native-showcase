@@ -37,11 +37,17 @@ export {
 } from './src/molecules/ProductPreview';
 export {default as SectionDetail} from './src/molecules/SectionDetail';
 export {
+  default as CircleColorOption,
+  CircleColorOptionType,
+} from './src/molecules/CircleColorOption';
+
+export {
   default as PickerList,
   OptionType,
   PickerListProps,
 } from './src/organisms/PickerList';
 export {
-  default as CircleColorOption,
-  CircleColorOptionType,
-} from './src/molecules/CircleColorOption';
+  default as PickerColor,
+  ColorType,
+  PickerColorProps,
+} from './src/organisms/PickerColor';

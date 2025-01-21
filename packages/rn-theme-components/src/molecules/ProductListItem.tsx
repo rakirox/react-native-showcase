@@ -1,14 +1,14 @@
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
-import Text, {PsmText, SmText} from '../atoms/Text';
-import Stars from './Stars';
-import {useTheme} from '../hooks/theme';
-import Favorite from '../atoms/Favorite';
 import Animated, {
   FadeOut,
   SlideInLeft,
   SlideInRight,
 } from 'react-native-reanimated';
+import Text, {PsmText, SmText} from '../atoms/Text';
+import Stars from './Stars';
+import {useTheme} from '../hooks/theme';
+import Favorite from '../atoms/Favorite';
 import {ProductItemProps} from './ProductItem';
 
 export default function ProductListItem({

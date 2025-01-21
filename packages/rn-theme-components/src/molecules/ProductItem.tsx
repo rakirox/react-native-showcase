@@ -17,22 +17,12 @@ export interface ProductItemTypeProps extends ProductItemProps {
 }
 
 export default function ProductItem({
-  productImage,
   productLayoutType = 'list',
-  delayedTime = 0,
   ...props
 }: ProductItemTypeProps) {
   return productLayoutType === 'list' ? (
-    <ProductListItem
-      productImage={productImage}
-      delayedTime={delayedTime}
-      {...props}
-    />
+    <ProductListItem {...props} />
   ) : (
-    <ProductGridItem
-      productImage={productImage}
-      delayedTime={delayedTime}
-      {...props}
-    />
+    <ProductGridItem {...props} />
   );
 }
