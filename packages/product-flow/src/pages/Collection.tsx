@@ -7,8 +7,8 @@ import {Navbar, Text} from 'rn-theme-components';
 import GET_SEARCH from '../graphql/search.graphql';
 import {
   CollectionResult,
+  FacetValue,
   FacetValueFilterInput,
-  FacetValueResult,
   SearchResult,
   SearchResultSortParameter,
   SortOrder,
@@ -58,9 +58,9 @@ export default function CollectionPage({route}: any) {
     [setSortProducts],
   );
 
-  const onFilter = useCallback((facets: FacetValueResult[]) => {
+  const onFilter = useCallback((facets: FacetValue[]) => {
     const ids = facets.map(filter => {
-      return filter.facetValue.id;
+      return filter.id;
     });
     const filter = {
       or: ids,
@@ -97,18 +97,18 @@ export default function CollectionPage({route}: any) {
   }
   return (
     <Collection
-      onProductPress={productId => {
-        navigation.navigate('Product', {productId});
-      }}
       loading={loading}
       products={data?.search?.items as SearchResult[]}
       title={collection?.collection.name}
-      facets={data?.search.facetValues as FacetValueResult[]}
+      facets={data?.search.facetValues.map(f => f.facetValue as FacetValue)}
       collections={
         data?.search.collections.filter(
           cresult => cresult.collection.id !== collectionId,
         ) as CollectionResult[]
       }
+      onProductPress={productId => {
+        navigation.navigate('Product', {productId});
+      }}
       onTitleToggle={isShowing => setShowTitleOnNavbar(!isShowing)}
       onViewCollectionPress={collectionId =>
         navigation.push('Collection', {collectionId})

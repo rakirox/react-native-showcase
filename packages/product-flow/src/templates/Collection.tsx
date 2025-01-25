@@ -20,6 +20,7 @@ import {
   SmText,
   Icon,
   PickerColor,
+  ColorType,
 } from 'rn-theme-components';
 import Animated, {
   FadeIn,
@@ -32,10 +33,11 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import removeMd from 'remove-markdown';
+import stc from 'string-to-color';
+
 import {
   CollectionResult,
-  FacetValueFilterInput,
-  FacetValueResult,
+  FacetValue,
   ProductVariant,
   SearchResult,
 } from '../gql/graphql';
@@ -45,14 +47,14 @@ export type CollectionProps = {
   onLoadMoreProducts?: () => void;
   onLayoutPress?: () => void;
   onSort?: (option: SortOption) => void;
-  onFilter?: (filters: FacetValueResult[]) => void;
+  onFilter?: (filters: FacetValue[]) => void;
   onViewCollectionPress?: (collectionId: string) => void;
   onTitleToggle?: (isShowing: boolean) => void;
   onProductPress?: (productId: string) => void;
   loading?: boolean;
   products?: SearchResult[];
   title?: string;
-  facets?: FacetValueResult[];
+  facets?: FacetValue[];
   collections?: CollectionResult[];
 };
 
@@ -94,7 +96,6 @@ export const sortOptions: SortOption[] = [
 ];
 
 const TITLE_HEIGHT = 48;
-const FILTERS_HEIGHT = 54;
 
 export default function Collection({
   loading = true,
@@ -112,16 +113,33 @@ export default function Collection({
   const {sizes} = useTheme();
   const [layoutView, setLayoutView] = useState<'grid' | 'list'>('grid');
   const [sortBy, setSortOption] = useState<SortOption>(sortOptions[0]);
-  const [filters, setFilters] = useState<FacetValueResult[]>([]);
-  // const [filters, setFilters] = useState<>([]);
+  const [filters, setFilters] = useState<FacetValue[]>([]);
+  const [selectedColors, setSelectedColors] = useState<ColorType<FacetValue>[]>(
+    [],
+  );
   const [scroll, setScroll] = useState(0);
   const [isTitleVisible, setTitleVisible] = useState(true);
-  const [isFiltersVisible, setFiltersVisible] = useState(true);
   const titleHeight = useSharedValue(TITLE_HEIGHT);
-  const filtersHeight = useSharedValue(FILTERS_HEIGHT);
+
   const bottomSortSheetRef = useRef<BottomSheet>(null);
   const bottomFiltersSheetRef = useRef<BottomSheet>(null);
+
   const snapPoints = useMemo(() => ['30%', '50%'], []);
+  const colors = useMemo<ColorType<FacetValue>[] | undefined>(() => {
+    const result: ColorType<FacetValue>[] = [];
+    facets
+      ?.filter(facetValue => facetValue.facet.code === 'color')
+      .forEach(facet => {
+        if (!result.some(c => c.value.code === facet.code)) {
+          result.push({
+            color: stc(facet.code),
+            value: facet,
+          });
+        }
+      });
+    return result;
+  }, [facets]);
+
   const animatedTitleStyle = useAnimatedStyle(() => {
     return {
       height: titleHeight.value,
@@ -133,16 +151,6 @@ export default function Collection({
   const onLayoutPress = useCallback(() => {
     setLayoutView(layoutView === 'grid' ? 'list' : 'grid');
   }, [layoutView, setLayoutView]);
-  // const handleFiltersRemove = useCallback(() => {
-  //   filtersHeight.value = withTiming(0, {duration: 500}, () => {
-  //     runOnJS(setFiltersVisible)(false);
-  //   });
-  // }, [filtersHeight, setFiltersVisible]);
-  // const handleFiltersAdd = useCallback(() => {
-  //   setFiltersVisible(true);
-  //   filtersHeight.value = withTiming(FILTERS_HEIGHT, {duration: 500});
-  // }, [setFiltersVisible]);
-
   const handleTitleRemove = useCallback(() => {
     titleHeight.value = withTiming(0, {duration: 500}, () => {
       runOnJS(setTitleVisible)(false);
@@ -162,12 +170,10 @@ export default function Collection({
   const onFilterOpen = useCallback(() => {
     bottomFiltersSheetRef.current?.expand();
   }, []);
-  // }, [handleFiltersRemove, handleFiltersAdd, isFiltersVisible]);
-  const onFilterAction = (facet: FacetValueResult) => {
-    const newFilters: FacetValueResult[] = [...filters];
-    const index = newFilters.findIndex(
-      f => f.facetValue.id === facet.facetValue.id,
-    );
+
+  const onFilterAction = (facet: FacetValue) => {
+    const newFilters: FacetValue[] = [...filters];
+    const index = newFilters.findIndex(f => f.id === facet.id);
     if (index > -1) {
       newFilters.splice(index, 1);
     } else {
@@ -198,30 +204,27 @@ export default function Collection({
             {title}
           </H2>
         )}
-        {isFiltersVisible && (
-          <FlatList<FacetValueResult>
-            style={{height: 70}}
-            contentContainerStyle={{
-              padding: sizes.global.padding,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            horizontal
-            data={facets?.filter(fa => fa.facetValue.facet.code === 'category')}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={item => `facet-group-${item.facetValue.id}`}
-            renderItem={({item, index}) => (
-              <FilterButton
-                entering={SlideInRight.delay(100 * index)}
-                onButtonPress={() => onFilterAction(item)}
-                label={item.facetValue.code}
-                selected={filters.some(
-                  f => f.facetValue.code === item.facetValue.code,
-                )}
-              />
-            )}
-          />
-        )}
+
+        <FlatList<FacetValue>
+          style={{height: 70}}
+          contentContainerStyle={{
+            padding: sizes.global.padding,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          horizontal
+          data={facets?.filter(fa => fa.facet.code === 'category')}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item => `facet-group-${item.id}`}
+          renderItem={({item, index}) => (
+            <FilterButton
+              entering={SlideInRight.delay(100 * index)}
+              onButtonPress={() => onFilterAction(item)}
+              label={item.code}
+              selected={filters.some(f => f.code === item.code)}
+            />
+          )}
+        />
         <Animated.View entering={FadeIn.delay(400)}>
           <View
             style={{
@@ -237,7 +240,7 @@ export default function Collection({
             <ActionIcon icon={layoutView} onPress={onLayoutPress} />
           </View>
         </Animated.View>
-        <Separator style={{marginBottom: 0}} entering={SlideInRight} />
+        <Separator style={{marginBottom: 0}} entering={FadeIn.delay(1000)} />
 
         <FlatList<SearchResult>
           onScroll={event => {
@@ -325,10 +328,10 @@ export default function Collection({
         </BottomSheetView>
       </BottomSheet>
       <BottomSheet
-        ref={bottomFiltersSheetRef}
         enablePanDownToClose
         index={-1}
         snapPoints={snapPoints}
+        ref={bottomFiltersSheetRef}
         backdropComponent={BottomSheetBackdrop}
         style={{
           borderRadius: 34,
@@ -339,7 +342,24 @@ export default function Collection({
             <Text style={{alignSelf: 'center', fontWeight: '600'}}>
               Filters
             </Text>
-            <PickerColor />
+            <PickerColor
+              colors={colors}
+              onColorPress={color => {
+                const id = selectedColors.findIndex(
+                  c => c.color === color.color,
+                );
+                const result: ColorType[] = [];
+                onFilterAction(color.value as FacetValue);
+                if (id >= 0) {
+                  selectedColors.splice(id, 1);
+                  result.push(...selectedColors);
+                } else {
+                  result.push(...selectedColors, color);
+                }
+                setSelectedColors(result);
+              }}
+              selectedColors={selectedColors}
+            />
             {/* <PickerColor  /> */}
             <TouchableOpacity onPress={() => {}}>
               <View

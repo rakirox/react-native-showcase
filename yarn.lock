@@ -6751,6 +6751,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colornames@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "colornames@npm:1.1.1"
+  checksum: 10c0/a17049f485ebf1a1de659f8fc0f5b2397b48885122c3b2e60cf078aabc5e1cf06d7b934ad4033eb161e7630d871b4b388385c67d5adb179e90ac5e7ca3c6fdf3
+  languageName: node
+  linkType: hard
+
 "combined-stream@npm:^1.0.8":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
@@ -9311,6 +9318,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hex-rgb@npm:^4.1.0":
+  version: 4.3.0
+  resolution: "hex-rgb@npm:4.3.0"
+  checksum: 10c0/ce2c2ff260d9e0686bead74e3318c1684d8a2da856da30ed90535442f705fb4f5cd93ffe70274e2534a7319a99cda6a6617f23d4f163b72867f406e25ea30cb4
+  languageName: node
+  linkType: hard
+
 "highlight.js@npm:^10.7.1":
   version: 10.7.3
   resolution: "highlight.js@npm:10.7.3"
@@ -11134,6 +11148,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.padend@npm:^4.6.1":
+  version: 4.6.1
+  resolution: "lodash.padend@npm:4.6.1"
+  checksum: 10c0/da10eae6e7862541e431d97e652ea66690307104676a30793398e2f66d0fd9a62b07f199451d2185560d9b4627dc6652d33dc7cceb7ab9d843f6e15addec56f5
+  languageName: node
+  linkType: hard
+
 "lodash.sortby@npm:^4.7.0":
   version: 4.7.0
   resolution: "lodash.sortby@npm:4.7.0"
@@ -11145,6 +11166,20 @@ __metadata:
   version: 4.1.1
   resolution: "lodash.throttle@npm:4.1.1"
   checksum: 10c0/14628013e9e7f65ac904fc82fd8ecb0e55a9c4c2416434b1dd9cf64ae70a8937f0b15376a39a68248530adc64887ed0fe2b75204b2c9ec3eea1cb2d66ddd125d
+  languageName: node
+  linkType: hard
+
+"lodash.trimstart@npm:^4.5.1":
+  version: 4.5.1
+  resolution: "lodash.trimstart@npm:4.5.1"
+  checksum: 10c0/de0d4b1da63fb98cdae1e9ce02e845e5791b0cae78285f0dc6a8029878e7663e586bf6660ab49c5c12302432583f5f7ec2effe735645b208cbf758eba5f9f0d8
+  languageName: node
+  linkType: hard
+
+"lodash.words@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "lodash.words@npm:4.2.0"
+  checksum: 10c0/bb67bf8d9c9797794dc8254f8888eaf2e1e3bf154de736505574d4a0e3fc4489349ef9361ef7bb7288276e0fee2a22d6d81f83a3608ea41a326f5ae1ab506f40
   languageName: node
   linkType: hard
 
@@ -13311,6 +13346,7 @@ __metadata:
     react-native: "npm:0.76.5"
     react-native-reanimated: "npm:3.16.6"
     react-test-renderer: "npm:18.3.1"
+    string-to-color: "npm:^2.2.2"
     typescript: "npm:5.0.4"
     zustand: "npm:^5.0.3"
   peerDependencies:
@@ -14094,6 +14130,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rgb-hex@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "rgb-hex@npm:3.0.0"
+  checksum: 10c0/6d287c540b03a11ce318b0ab2cb930949604cd2421e662b8a59e9d02345f6da6477c6b60d7b4fd32b6752527ee9f993bba72da48325be9dd3162b4c25d650c91
+  languageName: node
+  linkType: hard
+
 "rimraf@npm:^3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
@@ -14857,6 +14900,20 @@ __metadata:
   version: 3.0.1
   resolution: "string-natural-compare@npm:3.0.1"
   checksum: 10c0/85a6a9195736be500af5d817c7ea36b7e1ac278af079a807f70f79a56602359ee6743ca409af6291b94557de550ff60d1ec31b3c4fc8e7a08d0e12cdab57c149
+  languageName: node
+  linkType: hard
+
+"string-to-color@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "string-to-color@npm:2.2.2"
+  dependencies:
+    colornames: "npm:^1.1.1"
+    hex-rgb: "npm:^4.1.0"
+    lodash.padend: "npm:^4.6.1"
+    lodash.trimstart: "npm:^4.5.1"
+    lodash.words: "npm:^4.2.0"
+    rgb-hex: "npm:^3.0.0"
+  checksum: 10c0/efad47e261741e2e51cc677c590c2704658b653892b8faa7418322322171bde7c5beb97795761aa1ee27dc220f90ae29793043e25422563f8d27fc3aef96e3af
   languageName: node
   linkType: hard
 
